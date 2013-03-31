@@ -12,7 +12,7 @@
          cocreate-instance-from-progid
          cci/progid
 
-         get-active-object-from-coclass	
+	 com-get-active-object-from-coclass
          gao/coclass
          
          coclass
@@ -26,11 +26,11 @@
          com-invoke
 
          com-get-properties
-	 (rename-out [mx:com-get-property-type com-get-property-type])
+         (rename-out [mx:com-get-property-type com-get-property-type])
          com-get-property
 
          com-set-properties
-	 (rename-out [mx:com-set-property-type com-set-property-type])
+         (rename-out [mx:com-set-property-type com-set-property-type])
          com-set-property!
 
          com-help
@@ -81,10 +81,10 @@
 (define (cci/progid progid [where 'local])
   (cocreate-instance-from-progid progid where))
 
-(define (get-active-object-from-coclass coclass)
-  (com-get-active-object (coclass->clsid* 'get-active-object-from-coclass coclass)))
+(define (com-get-active-object-from-coclass coclass)
+  (com-get-active-object (coclass->clsid* 'com-get-active-object-from-coclass coclass)))
 (define (gao/coclass coclass)
-  (get-active-object-from-coclass coclass))
+  (com-get-active-object-from-coclass coclass))
 
 (define (coclass obj)
   (clsid->coclass (com-object-clsid obj)))
@@ -143,7 +143,7 @@
 
 (define (reorder t)
   (if (and (pair? t)
-	   (eq? (car t) '->))
+           (eq? (car t) '->))
       (append (cadr t) (list '-> (caddr t)))
       t))
 
